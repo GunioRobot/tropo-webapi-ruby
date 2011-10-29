@@ -7,8 +7,8 @@ enable :sessions
 post '/index.json' do
   tropo = Tropo::Generator.new do
             on :event => 'continue', :next => '/the_answer.json'
-            ask({ :name    => 'account_number', 
-                  :bargein => 'true', 
+            ask({ :name    => 'account_number',
+                  :bargein => 'true',
                   :timeout => 30,
                   :require => 'true' }) do
                     say     :value => 'Please enter your account number'
@@ -35,8 +35,8 @@ post '/ask.json' do
   tropo = Tropo::Generator.new do
             on :event => 'hangup', :next => '/hangup.json'
             on :event => 'continue', :next => '/answer.json'
-            ask({ :name    => 'account_number', 
-                  :bargein => 'true', 
+            ask({ :name    => 'account_number',
+                  :bargein => 'true',
                   :timeout => 30,
                   :require => 'true' }) do
                     say     :value => 'Please say your account number'
@@ -84,8 +84,8 @@ post '/hangup.json' do
 end
 
 post '/conference.json' do
-  tropo = Tropo::Generator.conference({ :name       => 'foo', 
-                                        :id         => '1234', 
+  tropo = Tropo::Generator.conference({ :name       => 'foo',
+                                        :id         => '1234',
                                         :mute       => false,
                                         :send_tones => false,
                                         :exit_tone  => '#' }) do
@@ -127,8 +127,8 @@ post '/total_recording.json' do
 end
 
 post '/record.json' do
-  response = Tropo::Generator.record({ :name       => 'foo', 
-                                       :url        => 'http://sendme.com/tropo', 
+  response = Tropo::Generator.record({ :name       => 'foo',
+                                       :url        => 'http://sendme.com/tropo',
                                        :beep       => true,
                                        :send_tones => false,
                                        :exit_tone  => '#' }) do

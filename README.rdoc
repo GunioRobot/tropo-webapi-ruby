@@ -87,30 +87,30 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
 
   # Produces a Ruby hash:
   #
-  # { :session => 
-  #   { :timestamp    => Tue Jan 19 18:27:46 -0500 2010, 
-  #     :user_type    =>"HUMAN", 
+  # { :session =>
+  #   { :timestamp    => Tue Jan 19 18:27:46 -0500 2010,
+  #     :user_type    =>"HUMAN",
   #     :initial_text => nil,
-  #     :account_id   =>"0", 
-  #     :headers      => [{ "value" => "70", "key"=>"Max-Forwards" }, 
-  #                       { "value" => "385", "key"=>"Content-Length" }, 
-  #                       { "value" => "<sip:127.0.0.1:49152>", "key"=>"Contact" }, 
-  #                       { "value" => "replaces", "key"=>"Supported" }, 
-  #                       { "value" => "<sip:sample.json@localhost:5555>", "key"=>"To" }, 
-  #                       { "value" => "1 INVITE", "key"=>"CSeq" }, 
-  #                       { "value" => "SJphone-M/1.65.382f (SJ Labs)", "key"=>"User-Agent" }, 
-  #                       { "value" => "SIP/2.0/UDP 127.0.0.1:49152;branch=z9000000a9;rport=49152", "key"=>"Via" }, 
-  #                       { "value" => "3FA7C70A1DD211B286B7A583D7B46DDD0xac106207", "key"=>"Call-ID" }, 
-  #                       { "value" => "application/sdp", "key"=>"Content-Type" }, 
+  #     :account_id   =>"0",
+  #     :headers      => [{ "value" => "70", "key"=>"Max-Forwards" },
+  #                       { "value" => "385", "key"=>"Content-Length" },
+  #                       { "value" => "<sip:127.0.0.1:49152>", "key"=>"Contact" },
+  #                       { "value" => "replaces", "key"=>"Supported" },
+  #                       { "value" => "<sip:sample.json@localhost:5555>", "key"=>"To" },
+  #                       { "value" => "1 INVITE", "key"=>"CSeq" },
+  #                       { "value" => "SJphone-M/1.65.382f (SJ Labs)", "key"=>"User-Agent" },
+  #                       { "value" => "SIP/2.0/UDP 127.0.0.1:49152;branch=z9000000a9;rport=49152", "key"=>"Via" },
+  #                       { "value" => "3FA7C70A1DD211B286B7A583D7B46DDD0xac106207", "key"=>"Call-ID" },
+  #                       { "value" => "application/sdp", "key"=>"Content-Type" },
   #                       { "value" => "unknown <sip:127.0.0.1:49152>;tag=750b1b1648e9c876", "key"=>"From" }],
-  #     :id            => "3FA7C70A1DD211B286B7A583D7B46DDD0xac106207", 
-  #     :to            => { :network => "PSTN", 
-  #                         :channel => "VOICE", 
-  #                         :name    => "unknown", 
-  #                         :id      => "sample.json"}, 
-  #     :from          => { :network => "PSTN", 
-  #                         :channel => "VOICE", 
-  #                         :name    => "unknown", 
+  #     :id            => "3FA7C70A1DD211B286B7A583D7B46DDD0xac106207",
+  #     :to            => { :network => "PSTN",
+  #                         :channel => "VOICE",
+  #                         :name    => "unknown",
+  #                         :id      => "sample.json"},
+  #     :from          => { :network => "PSTN",
+  #                         :channel => "VOICE",
+  #                         :name    => "unknown",
   #                         :id      => "unknown"}}}
   #
   post '/start_session.json' do
@@ -124,8 +124,8 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
     tropo = Tropo::Generator.new do
               on :event => 'hangup', :next => '/hangup.json'
               on :event => 'continue', :next => '/answer.json'
-              ask({ :name    => 'account_number', 
-                    :bargein => true, 
+              ask({ :name    => 'account_number',
+                    :bargein => true,
                     :timeout => 30,
                     :require => 'true' }) do
                       say     :value => 'Please say your account number'
@@ -137,18 +137,18 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
 
   # Produces a Ruby hash, if the user gives a response before hanging up:
   #
-  # { :result => 
-  #   { :actions          => { :attempts       => 1, 
-  #                            :disposition    => "SUCCESS", 
-  #                            :interpretation => "12345", 
-  #                            :confidence     => 100, 
-  #                            :name           => "account_number", 
-  #                            :utterance      => "1 2 3 4 5" }, 
-  #     :session_duration => 3, 
-  #     :error            => nil, 
-  #     :sequence         => 1, 
-  #     :session_id       => "5325C262-1DD2-11B2-8F5B-C16F64C1D62E@127.0.0.1", 
-  #     :state            => "ANSWERED", 
+  # { :result =>
+  #   { :actions          => { :attempts       => 1,
+  #                            :disposition    => "SUCCESS",
+  #                            :interpretation => "12345",
+  #                            :confidence     => 100,
+  #                            :name           => "account_number",
+  #                            :utterance      => "1 2 3 4 5" },
+  #     :session_duration => 3,
+  #     :error            => nil,
+  #     :sequence         => 1,
+  #     :session_id       => "5325C262-1DD2-11B2-8F5B-C16F64C1D62E@127.0.0.1",
+  #     :state            => "ANSWERED",
   #     :complete         => true } }
   #
   post '/answer.json' do
@@ -157,13 +157,13 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
   end
 
   # Produces a Ruby hash, if the user hangs up before giving a reponse
-  # { :result => 
-  #   { :actions          => {}, 
-  #     :session_duration => 1, 
-  #     :error            => nil, 
-  #     :sequence         => 1, 
-  #     :session_id       => "812BEF50-1DD2-11B2-8F5B-C16F64C1D62E@127.0.0.1", 
-  #     :state            => "DISCONNECTED", 
+  # { :result =>
+  #   { :actions          => {},
+  #     :session_duration => 1,
+  #     :error            => nil,
+  #     :sequence         => 1,
+  #     :session_id       => "812BEF50-1DD2-11B2-8F5B-C16F64C1D62E@127.0.0.1",
+  #     :state            => "DISCONNECTED",
   #     :complete         => true } }
   #
   post '/hangup.json' do
@@ -190,7 +190,7 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
   post '/speak.json' do
     t = Tropo::Generator.new(:voice => 'kate')
     t.say 'Hello!' # Will speak as kate now
-    
+
     # or
 
     t = Tropo::Generator.new
@@ -203,7 +203,7 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
   post '/ask.json' do
     t = Tropo::Generator.new(:recognizer => 'fr-fr')
     t.ask({ :name    => 'account_number', # Will now use the French speech recognition engine
-            :bargein => true, 
+            :bargein => true,
             :timeout => 30,
             :require => 'true' }) do
               say     :value => "S'il vous plaît dire votre numéro de compte", :voice => 'florence'
@@ -215,7 +215,7 @@ Using the great RESTful Web Services framework Sinatra for Ruby.
     t = Tropo::Generator.new
     t.recognizer = 'fr-fr'
     t.ask({ :name    => 'account_number', # Will now use the French speech recognition engine
-            :bargein => true, 
+            :bargein => true,
             :timeout => 30,
             :require => 'true' }) do
               say     :value => "S'il vous plaît dire votre numéro de compte", :voice => 'florence'
